@@ -6,5 +6,9 @@ eureka:
 spring:
   application:
     name: spring-cloud-service-admin
+  boot:
+    admin:
+      client:
+        url: http://localhost:8084
 server:
       port: 8762
