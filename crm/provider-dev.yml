@@ -1,0 +1,101 @@
+#指定启动端口
+server:
+  port: 8081
+  
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8080/eureka/  
+ 
+#指定log配置
+logging:
+  config: ${loggingConfig:classpath:log4j2.xml}
+  level:
+     edsp:
+         dao: DEBUG
+         transport: DEBUG
+     cn.sunline.crm.provider.mapper: DEBUG
+  path: ./logs
+file:
+  encoding: utf-8
+ 
+#==============####jdbc配置==============####
+spring:
+  application:
+    name: provider
+  zipkin:
+    base-url: http://localhost:9411
+  boot:
+    admin:
+      client:
+        url: http://localhost:8084
+
+  datasource:
+    enabled: true  #是否启用数据库
+    monitor: true  #是否开启druid监控功能
+    type: com.alibaba.druid.pool.DruidDataSource
+    #dialect: cn.sunline.edsp.boot.plugins.mybatis.dialect.MySQLDialect
+    defaultDataSourceId: datasource0
+    dataSourceModel[0]:
+      dialect: cn.sunline.edsp.dao.mybatis.plugins.mybatis.dialect.MySQLDialect
+      driverClassName: com.mysql.cj.jdbc.Driver
+      id: datasource0
+      url: jdbc:mysql://localhost:3306/mydb?serverTimezone=GMT
+      username: root
+      password: 123456
+      initialSize: 10
+      minIdle: 5
+      maxActive: 50
+    dataSourceModel[1]: #可配置多数据源，添加则与此同级dataSourceModel[1..]
+      dialect: cn.sunline.edsp.dao.mybatis.plugins.mybatis.dialect.OracleDialect
+      driverClassName: oracle.jdbc.OracleDriver
+      id: datasource1
+      url: jdbc:oracle:thin:@192.168.123.119:1521:orcl
+      validationQuery: SELECT 1 FROM DUAL
+      username: ecif
+      password: 123456
+      initialSize: 10
+      minIdle: 5
+      maxActive: 50
+#    mybatis-mapper:  classpath:mapper/*.xml
+druid:
+      stat-view-servlet:
+        enabled: true
+        url-pattern: /druid/*
+        deny: 192.168.0.1
+        allow: 192.168.0.1,192.168.0.2,127.0.0.1
+        loginUsername : admin
+        loginPassword: admin
+      filter:
+        stat:
+          log-slow-sql: true
+          slow-sql-millis: 1000
+          merge-sql: true
+        wall:
+          config:
+            multi-statement-allow: true
+mybatis:
+    #实体类存放路径
+    type-aliases-package: cn.sunline.crm.provider.entity
+    mapper-locations: classpath:mapper/*.xml
+#==============事务配置==============
+#execution(* cn.sunline..*Service.*(..)) or execution(* cn.xxxx..*Service.*(..))#######
+aop:
+  pointcut:
+    expression: execution(* cn.sunline..*Service.*(..))
+ 
+#==============生成API文档==============
+swagger: 
+  enabled: true
+  basePackage: cn.sunline.edsp.samples.controller     #扫描的包名
+  title:  edsp
+  contact: SUNLINE
+  version: 1.0.0
+
+
+pagehelper:
+  reasonable: true
+  support-methods-arguments: true
+  params: count=countSql
+  helper-dialect:  oracle
+
