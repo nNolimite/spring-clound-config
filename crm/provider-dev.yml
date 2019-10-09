@@ -1,12 +1,12 @@
 #指定启动端口
 server:
   port: 8081
-  
+
 eureka:
   client:
     serviceUrl:
-      defaultZone: http://localhost:8080/eureka/  
- 
+      defaultZone: http://localhost:8080/eureka/
+
 #指定log配置
 logging:
   config: ${loggingConfig:classpath:log4j2.xml}
@@ -18,7 +18,7 @@ logging:
   path: ./logs
 file:
   encoding: utf-8
- 
+
 #==============####jdbc配置==============####
 spring:
   application:
@@ -83,9 +83,9 @@ mybatis:
 aop:
   pointcut:
     expression: execution(* cn.sunline..*Service.*(..))
- 
+
 #==============生成API文档==============
-swagger: 
+swagger:
   enabled: true
   basePackage: cn.sunline.edsp.samples.controller     #扫描的包名
   title:  edsp
