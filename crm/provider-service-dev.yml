@@ -14,7 +14,7 @@ logging:
      edsp:
          dao: DEBUG
          transport: DEBUG
-     cn.sunline.crm.provider.mapper: DEBUG
+         mapper: DEBUG
   path: ./logs
 file:
   encoding: utf-8
