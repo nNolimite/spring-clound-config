@@ -11,5 +11,25 @@ spring:
         min-idle: 1
         max-active: 20
         test-on-borrow: true
+        stat-view-servlet:
+          enabled: true
+          url-pattern: /druid/*
+          deny: 192.168.0.1
+          allow: 192.168.0.1,192.168.0.2,127.0.0.1
+          loginUsername : admin
+          loginPassword: admin
+        filter:
+          stat:
+            log-slow-sql: true
+            slow-sql-millis: 1000
+            merge-sql: true
+          wall:
+            config:
+              multi-statement-allow: true
 
+pagehelper:
+  reasonable: true
+  support-methods-arguments: true
+  params: count=countSql
+  helper-dialect:  mysql
 
