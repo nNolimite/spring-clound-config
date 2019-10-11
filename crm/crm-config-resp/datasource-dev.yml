@@ -11,8 +11,6 @@ spring:
         min-idle: 1
         max-active: 20
         test-on-borrow: true
-        
-        test-on-borrow: true
         stat-view-servlet:
           enabled: true
           url-pattern: /druid/*
