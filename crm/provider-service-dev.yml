@@ -28,6 +28,7 @@ mybatis:
   #实体类存放路径
   type-aliases-package: cn.sunline.example.entity
   mapper-locations: classpath:mapper/*.xml
+
 #==============事务配置==============
 #execution(* cn.sunline..*Service.*(..)) or execution(* cn.xxxx..*Service.*(..))#######
 aop:
