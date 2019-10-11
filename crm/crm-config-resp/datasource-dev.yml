@@ -1,0 +1,38 @@
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    #driverClassName: oracle.jdbc.OracleDriver
+    druid:
+        url: jdbc:oracle:thin:@192.168.123.119:1521:orcl
+        username: ecif
+        password: 123456
+        driverClassName: oracle.jdbc.OracleDriver
+        initial-size: 1
+        min-idle: 1
+        max-active: 20
+        test-on-borrow: true
+        
+        test-on-borrow: true
+        stat-view-servlet:
+          enabled: true
+          url-pattern: /druid/*
+          deny: 192.168.0.1
+          allow: 192.168.0.1,192.168.0.2,127.0.0.1
+          loginUsername : admin
+          loginPassword: admin
+        filter:
+          stat:
+            log-slow-sql: true
+            slow-sql-millis: 1000
+            merge-sql: true
+          wall:
+            config:
+              multi-statement-allow: true
+
+pagehelper:
+  reasonable: true
+  support-methods-arguments: true
+  params: count=countSql
+  helper-dialect:  oracle
+
+
