@@ -1,0 +1,35 @@
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+        url: jdbc:oracle:thin:@106.15.250.228:1521:helowin
+        username: pcsmkt
+        password: 123456
+        driverClassName: oracle.jdbc.OracleDriver
+        #url: jdbc:mysql://localhost:3306/mydb?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=GMT
+        #username: root
+        #password: 123456
+        #driverClassName: com.mysql.cj.jdbc.Driver
+        initial-size: 1
+        min-idle: 1
+        max-active: 20
+        test-on-borrow: true
+        stat-view-servlet:
+          enabled: true
+          url-pattern: /druid/*
+          #deny: 192.168.0.1
+          #allow: 192.168.0.1,192.168.0.2,127.0.0.1
+          loginUsername : admin
+          loginPassword: admin
+        filter:
+          stat:
+            log-slow-sql: true
+            slow-sql-millis: 1000
+            merge-sql: true
+          wall:
+            config:
+              multi-statement-allow: true
+
+
+
+
